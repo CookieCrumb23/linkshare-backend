@@ -1,0 +1,13 @@
+[package]
+name = "linkshare"
+version = "0.1.0"
+authors = ["CookieCrumb23"]
+edition = "2018"
+
+[dependencies]
+rocket = "0.4.0"
+serde_derive = "1.0.85"
+serde = "1.0.85"
+rocket_contrib = "0.4.0"
+log = "0.4.6"
+env_logger = "0.6.0"
