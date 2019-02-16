@@ -8,6 +8,8 @@ use std::collections::HashSet;
 
 use rocket_contrib::json::Json;
 
+mod handlers;
+
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Hash, Clone)]
 pub struct Link {
     pub id: String,
@@ -21,9 +23,6 @@ pub struct Url {
 }
 
 
-mod io;
-
-
 #[post("/link", data = "<url>")]
 pub fn post(url: Json<Url>) -> Result<Json<Link>, Status> {
 
@@ -31,7 +30,7 @@ pub fn post(url: Json<Url>) -> Result<Json<Link>, Status> {
 
     let link = Link{url: url.url.to_owned(), read: false, id};
 
-    match io::save_link(&link) {
+    match handlers::save_link(&link) {
         Ok(_) => Ok(Json(link)),
         Err(_) => Err(Status::InternalServerError),
     }
@@ -39,14 +38,14 @@ pub fn post(url: Json<Url>) -> Result<Json<Link>, Status> {
 
 #[get("/link/<id>")]
 pub fn get_by_id(id: String) -> Result<Json<Link>, Status> {
-    io::get_link(&id)
+    handlers::get_link(&id)
         .map(Json)
         .ok_or(Status::NotFound)
 }
 
 #[get("/link")]
 pub fn get_all() -> Result<Json<HashSet<Link>>, Status> {
-    io::get_all_links()
+    handlers::get_all_links()
         .map(Json)
         .map_err(|_| Status::InternalServerError)
 }
