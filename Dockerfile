@@ -1,4 +1,4 @@
-FROM rust_musl_nightly AS builder
+FROM ekidd/rust-musl-builder:nightly AS builder
 
 RUN USER=rust cargo new --bin linkshare
 RUN sudo chown -R rust:rust /home/rust
