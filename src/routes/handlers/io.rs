@@ -1,6 +1,6 @@
-use std::fs::{File, OpenOptions};
-use std::collections::HashSet;
 use crate::routes::Link;
+use std::collections::HashSet;
+use std::fs::{File, OpenOptions};
 use std::io::{BufRead, BufReader, Write};
 
 type Result<T> = std::result::Result<T, Box<std::error::Error>>;

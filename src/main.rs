@@ -8,7 +8,12 @@ fn main() {
     rocket::ignite()
         .mount(
             "/",
-            routes![routes::post, routes::get_by_id, routes::get_all, routes::set_read_state],
+            routes![
+                routes::post,
+                routes::get_by_id,
+                routes::get_all,
+                routes::set_read_state
+            ],
         )
         .launch();
 }
