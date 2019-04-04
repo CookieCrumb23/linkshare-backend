@@ -16,17 +16,12 @@ pub struct Link {
     pub read: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Url {
-    url: String,
-}
-
 #[post("/link", data = "<url>")]
-pub fn post(url: Json<Url>) -> Result<Json<Link>, Status> {
-    let id = generate_id(&url.url);
+pub fn post(url: String) -> Result<Json<Link>, Status> {
+    let id = generate_id(&url);
 
     let link = Link {
-        url: url.url.to_owned(),
+        url: url.to_owned(),
         read: false,
         id,
     };
