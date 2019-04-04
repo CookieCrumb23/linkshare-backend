@@ -3,8 +3,6 @@ extern crate md5;
 use md5::{Digest, Md5};
 use rocket::http::Status;
 use serde_derive::{Deserialize, Serialize};
-use std::collections::HashSet;
-
 use rocket_contrib::json::Json;
 
 mod handlers;
@@ -38,7 +36,7 @@ pub fn get_by_id(id: String) -> Result<Json<Link>, Status> {
 }
 
 #[get("/link")]
-pub fn get_all() -> Result<Json<HashSet<Link>>, Status> {
+pub fn get_all() -> Result<Json<Vec<Link>>, Status> {
     handlers::get_all_links()
         .map(Json)
         .map_err(|_| Status::InternalServerError)
